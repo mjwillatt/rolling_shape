@@ -3,17 +3,26 @@ rolling_shape
 
 ![Rolling pentagon](https://github.com/mjwillatt/rolling_shape/blob/main/figures/rotated_output.gif?raw=true)
 
-Description and example usage
------------------------------
+Description
+-----------
 
 This program produces images of a shape rolling without slipping on a curve. To
 find the motion we need to solve a first order differential equation, which is
 achieved numerically using Simpson's rule.
 
+Example usage
+-------------
+
 The following command produces 300 images (nframes=300) of a regular pentagon
 (n=5) rolling without slipping from right to left (reverse),
 
 ./rolling_shape.py --n 5 --nframes 300 --reverse
+
+These images are made into a gif using ffmpeg with
+
+./make_gif.sh
+
+The resulting gif is displayed at the top of this README.
 
 Background theory
 -----------------
@@ -37,8 +46,8 @@ $$
 Solving this differential equation yields $\phi = \phi(t)$, which completely
 determines the trajectory of the shape.
 
-The following analysis applies to any polygon. Let us take the special case of
-a square. $r(\theta)$ is determined piecewise as $r(\theta) = w\sec(\theta)$
+The following analysis applies to any polygon, but let us take the special case
+of a square. $r(\theta)$ is determined piecewise as $r(\theta) = w\sec(\theta)$
 for $-\pi/4 \le \theta \lt \pi/4$, where $w$ is half the width of the square.
 Integrating the differential equation leads to
 
