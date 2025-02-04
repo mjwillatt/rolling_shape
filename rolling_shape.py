@@ -79,6 +79,8 @@ def test():
 
 def main(n=4, w=1.0, nframes=100, ncycles=6, reverse=False):
 
+    print(n)
+
     #thetas, rs = ellipse()
     thetas, rs = polygon(n, w)
     height = max(rs)
@@ -123,7 +125,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--n', type=int, default=4, help='Number of polygon sides')
   parser.add_argument('--w', type=float, default=1.0, help='Width of polygon')
-  parser.add_argument('--nframes', type=int, help='Number of images to save')
+  parser.add_argument('--nframes', type=int, default=100, help='Number of images to save')
   parser.add_argument('--ncycles', type=int, default=6,
                       help='Number of complete revolutions')
   parser.add_argument('--reverse', action='store_true', default=False,

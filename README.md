@@ -1,12 +1,19 @@
 rolling_shape
 =============
 
+![Rolling pentagon](https://github.com/mjwillatt/rolling_shape/blob/main/figures/rotated_output.gif?raw=true)
+
 Description and example usage
 -----------------------------
 
 This program produces images of a shape rolling without slipping on a curve. To
 find the motion we need to solve a first order differential equation, which is
 achieved numerically using Simpson's rule.
+
+The following command produces 300 images (nframes=300) of a regular pentagon
+(n=5) rolling without slipping from right to left (reverse),
+
+./rolling_shape.py --n 5 --nframes 300 --reverse
 
 Background theory
 -----------------
