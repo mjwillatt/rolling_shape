@@ -97,7 +97,7 @@ def gudermannian(t):
 
 ##########################################################################################
 
-def test():
+def test_quadrature():
     '''
     Test whether the quadrature agrees with the exact solution for a square
     '''
@@ -134,8 +134,8 @@ def main(n=4, w=1.0, nframes=100, ncycles=6, reverse=False, test=False):
     r = CubicSpline(thetas, rs, bc_type='periodic')
 
     if test == True:
-        close = test()
-        print('Quadrature result agrees with exact result for square?', close)
+        close = test_quadrature()
+        print('Quadrature result agrees with exact result for square:', close)
 
     #nphis = number of quadrature points
     nphis = 1000
@@ -189,4 +189,4 @@ if __name__ == '__main__':
   parser.add_argument('--test', action='store_true', default=False,
                       help='Toggle for testing quadrature accuracy')
   args = parser.parse_args()
-  main(args.n, args.w, args.nframes, args.ncycles, args.reverse)
+  main(args.n, args.w, args.nframes, args.ncycles, args.reverse, args.test)
