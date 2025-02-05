@@ -6,19 +6,25 @@ rolling_shape
 Description
 -----------
 
-This program produces images of a shape rolling without slipping on a curve. To
-find the motion we need to solve a first order differential equation, which is
-achieved numerically using Simpson's rule.
+This program produces images of a shape rolling without slipping on a curve.
+The curve is determined from the shape and the rolling without slipping
+constraint. To find the trajectory we need to solve a first order differential
+equation, which is achieved numerically using separation of variables and
+Simpson's rule.
+
+The Python3 modules NumPy, SciPy, Matplotlib and argparse are required.
 
 Example usage
 -------------
 
-The following command produces 300 images (nframes=300) of a regular pentagon
-(n=5) rolling without slipping from right to left (reverse),
+The following command produces 1000 images (nframes=1000) of a regular pentagon
+(n=5) completing 10 revolutions (ncycles=10), rolling from right to left
+(reverse),
 
-./rolling_shape.py --n 5 --nframes 300 --reverse
+./rolling_shape.py --n 5 --nframes 1000 --ncycles 10 --reverse
 
-These images are made into a gif using ffmpeg with
+Using the following command, these images are rotated 180 degrees (convert) and
+combined into a gif (ffmpeg), 
 
 ./make_gif.sh
 
