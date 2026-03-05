@@ -169,7 +169,10 @@ def main(n=4, w=1.0, nframes=100, ncycles=6, reverse=False, test=False):
         ax.set_aspect('equal', adjustable='box')
         plt.xticks([])
         plt.yticks([])
-        plt.xlim(t0 + tmax/n, tf - tmax/n)
+        if n == 0:
+            plt.xlim(t0, tf)
+        else:
+            plt.xlim(t0 + tmax/n, tf - tmax/n)
         plt.ylim(-1.06*height, 1.06*height)
         ax.axis('off')
         fig = plt.gcf()
