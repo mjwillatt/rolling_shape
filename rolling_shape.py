@@ -10,8 +10,8 @@ from matplotlib import pyplot as plt
 def ellipse(w1=1.0, w2=2.0, nthetas=10000):
     '''
     Generate the polar representation r = r(theta) of an ellipse
-    w1 = length of semi axis 1
-    w2 = length of semi axis 2
+    w1 = length of semiaxis 1
+    w2 = length of semiaxis 2
     nthetas = number of thetas
     '''
     thetas = np.linspace(0.0, 2.0*np.pi, nthetas, endpoint=True)
@@ -120,15 +120,17 @@ def test_quadrature():
 def main(n=4, w=1.0, nframes=100, ncycles=6, reverse=False, test=False):
     '''
     Produce images of a shape rolling without slipping on a curve
-    n = number of polygon sides
-    w = width of polygon
+    n = number of polygon sides (0 for ellipse)
+    w = width of polygon (semiaxis 2 for ellipse)
     nframes = number of images to save
     ncycles = number of complete revolutions
     reverse = toggle for reversing the motion
     test = toggle for testing quadrature accuracy
     '''
-    #thetas, rs = ellipse()
-    thetas, rs = polygon(n, w)
+    if n == 0:
+        thetas, rs = ellipse(w2=w)
+    else:
+        thetas, rs = polygon(n, w)
     height = max(rs)
     #r = interpolated function for the polar representation r(theta)
     r = CubicSpline(thetas, rs, bc_type='periodic')
@@ -179,14 +181,41 @@ def main(n=4, w=1.0, nframes=100, ncycles=6, reverse=False, test=False):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--n', type=int, default=4, help='Number of polygon sides')
-  parser.add_argument('--w', type=float, default=1.0, help='Width of polygon')
-  parser.add_argument('--nframes', type=int, default=100, help='Number of images to save')
-  parser.add_argument('--ncycles', type=int, default=12,
-                      help='Number of complete revolutions')
-  parser.add_argument('--reverse', action='store_true', default=False,
-                      help='Toggle for reversing the motion')
-  parser.add_argument('--test', action='store_true', default=False,
-                      help='Toggle for testing quadrature accuracy')
+  parser.add_argument(
+      '--n',
+      type=int,
+      default=4,
+      help='Number of polygon sides (0 for ellipse)',
+  )
+  parser.add_argument(
+      '--w',
+      type=float,
+      default=1.0,
+      help='Width of polygon (semiaxis 2 for ellipse)',
+  )
+  parser.add_argument(
+      '--nframes',
+      type=int,
+      default=100,
+      help='Number of images to save',
+  )
+  parser.add_argument(
+      '--ncycles',
+      type=int,
+      default=12,
+      help='Number of complete revolutions',
+  )
+  parser.add_argument(
+      '--reverse',
+      action='store_true',
+      default=False,
+      help='Toggle for reversing the motion',
+  )
+  parser.add_argument(
+      '--test',
+      action='store_true',
+      default=False,
+      help='Toggle for testing quadrature accuracy',
+  )
   args = parser.parse_args()
   main(args.n, args.w, args.nframes, args.ncycles, args.reverse, args.test)

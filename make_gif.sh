@@ -12,4 +12,3 @@ ffmpeg -i ${dir}/${n2}.png -vf palettegen ${dir}/palette.png
 ffmpeg -i ${dir}/%4d.png -i ${dir}/palette.png -r 50 -lavfi paletteuse ${dir}/output.gif 
 #rotate the gif 180 degrees
 convert ${dir}/output.gif -rotate 180 ${dir}/rotated_output.gif
-
